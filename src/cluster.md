@@ -16,7 +16,7 @@ You can ensure that Docker's working as expected by running the following from
 a command prompt:
 
 ```bash
-  docker run hello-world
+docker run hello-world
 ```
 
 Instructions for installing git are at: https://git-scm.com/install/
@@ -26,14 +26,14 @@ Instructions for installing git are at: https://git-scm.com/install/
 To begin with, clone the mini-cluster repository:
 
 ```bash
-  git clone https://github.com/CCMI-CDT/mini-cluster
+git clone https://github.com/CCMI-CDT/mini-cluster
 ```
 
 Change into the repository directory, and bring up the cluster:
 
 ```bash
-  cd mini-cluster/
-  docker compose up
+cd mini-cluster/
+docker compose up
 ```
 
 This may take some time to download, particularly on slow connections,
@@ -48,7 +48,7 @@ to detach and return to the command prompt.
 To run a shell in the cluster, as a user, run:
 
 ```bash
-  docker exec -u user -it slurmctld bash
+docker exec -u user -it slurmctld bash
 ```
 
 You should by default find yourself in /data , which is writeable
@@ -60,13 +60,13 @@ nodes in the cluster that your jobs will run on.
 To build firedrake in /data:
 
 ```bash
-  cd /data
-  python3 -m venv venv-firedrake
-  . venv-firedrake/bin/activate
-  export CC=mpicc CXX=mpicxx PETSC_DIR=/usr HDF5_MPI=ON HDF5_DIR=/usr
-  echo 'setuptools<81' > constraints.txt
-  export PIP_CONSTRAINT=constraints.txt
-  pip install --no-binary=h5py --no-binary=mpi4py 'firedrake[check]'
+cd /data
+python3 -m venv venv-firedrake
+. venv-firedrake/bin/activate
+export CC=mpicc CXX=mpicxx PETSC_DIR=/usr HDF5_MPI=ON HDF5_DIR=/usr
+echo 'setuptools<81' > constraints.txt
+export PIP_CONSTRAINT=constraints.txt
+pip install --no-binary=h5py --no-binary=mpi4py 'firedrake[check]'
 ```
 
 ## Verifying Firedrake
@@ -74,7 +74,7 @@ To build firedrake in /data:
 Check that firedrake imports without errors:
 
 ```bash
-  python -c "from firedrake import *"
+python -c "from firedrake import *"
 ```
 
 Some warnings are expected here, but you shouldn't see errors.
@@ -84,29 +84,29 @@ Some warnings are expected here, but you shouldn't see errors.
 To check that the cluster is working properly, create a small test:
 
 ```bash
-  cat > h.py << EOF
-  from mpi4py import MPI
-  import socket
+cat > hello_mpi.py << EOF
+from mpi4py import MPI
+import socket
 
-  comm = MPI.COMM_WORLD
-  rank = comm.Get_rank()
-  size = comm.Get_size()
-  hostname = socket.gethostname()
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
+hostname = socket.gethostname()
 
-  print(f"Hello from rank {rank} of {size} on host {hostname}")
-  EOF
+print(f"Hello from rank {rank} of {size} on host {hostname}")
+EOF
 ```
 
 Then run the test:
 
 ```bash
-  srun -c 2 -n 2  python3 hello_mpi.py
+srun -c 2 -n 2  python3 hello_mpi.py
 ```
 
 You should see output of the form:
 
 ```
-  Hello from rank 0 of 1 on host c2
-  Hello from rank 0 of 1 on host c1
+Hello from rank 0 of 1 on host c2
+Hello from rank 0 of 1 on host c1
 ```
 
