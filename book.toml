@@ -1,5 +1,5 @@
 [book]
 title = "PDE Discretisations"
-authors = ["Timo Betcke", "Matthew Scroggs", "Colin Cotter"]
+authors = ["Timo Betcke", "Matthew Scroggs", "Colin Cotter", "Tim Greaves"]
 language = "en"
 src = "src"
