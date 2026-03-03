@@ -20,7 +20,8 @@ u<sub>k</sub><sup>n+1</sup> - u<sub>k</sub><sup>n</sup> + (c/4)(u<sub>k+1</sub><
 
 
 ## Theoretical Performance
-Perforamnce at some level 
+Perforamnce at some level is very dependent on the implementation.
+
 Our current implementation is CPU.
 
 Psuedo code
