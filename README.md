@@ -3,9 +3,13 @@
 ### Discretization method
 
 
-u-hat<sub>k</sub> - u<sub>k</sub><sup>n</sup> + (c/2)(u<sub>k+1</sub><sup>n</sup> - u<sub>k-1</sub><sup>n</sup>) = 0
+$$
+\hat{u}_k - u_k^n + \frac{c}{2}\left(u_{k+1}^n - u_{k-1}^n\right) = 0
+$$
 
-u<sub>k</sub><sup>n+1</sup> - u<sub>k</sub><sup>n</sup> + (c/4)(u<sub>k+1</sub><sup>n</sup> - u<sub>k-1</sub><sup>n</sup> + u-hat<sub>k+1</sub> - u-hat<sub>k-1</sub>) = 0
+$$
+u_k^{n+1} - u_k^n + \frac{c}{4}\left(u_{k+1}^n - u_{k-1}^n + \hat{u}_{k+1} - \hat{u}_{k-1}\right) = 0
+$$
 
 
 
@@ -53,4 +57,3 @@ On GPU this would be the `size of GPU buffer / O(k)`
 
 
 ## Parallel in time
-
