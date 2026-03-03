@@ -1,4 +1,4 @@
-# Heun Centered In Time
+# Heun in Time Centered In Space
 
 ### Discretization method
 
