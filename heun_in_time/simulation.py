@@ -69,15 +69,16 @@ def plotsol(u_n, i, delta_t):
 def compute_u_hat(u_n: np.ndarray, c: float) -> np.ndarray:
     """
     Computes the intermediate variable u_hat.
+    roll(u_n, 1) corresponds to u_{n-1} and roll(u_n, -1) corresponds to u_{n+1}.
     """
-    return -(c / 2) * u_n + (1 + c / 2) * np.roll(u_n, 1)
+    return (c / 2) * np.roll(u_n, 1) + u_n - (c / 2) * np.roll(u_n, -1)
 
 
 def update_u_hat(u_hat: np.ndarray, c: float) -> np.ndarray:
     """
     Computes the update to u_hat.
     """
-    return (c / 4) * (np.roll(u_hat, 1) - u_hat)
+    return (c / 4) * (np.roll(u_hat, 1) - np.roll(u_hat, -1))
 
 
 def update_u_n(u_n: np.ndarray, c: float) -> np.ndarray:
@@ -91,7 +92,7 @@ def update_u_n(u_n: np.ndarray, c: float) -> np.ndarray:
     u_hat = update_u_hat(u_hat, c)
 
     # 3. Final integration step
-    return -(c / 4) * u_n + (1 + c / 4) * np.roll(u_n, 1) + u_hat
+    return (c / 4) * np.roll(u_n, 1)  + u_n - (c / 4) * np.roll(u_n, -1) + u_hat
 
 
 def solve(
@@ -122,7 +123,7 @@ if __name__ == "__main__":
     # -------------------------
 
     # Advection Speed
-    a = 3.0
+    a = 2.0
 
     # Space Discretisation
     M = 100
