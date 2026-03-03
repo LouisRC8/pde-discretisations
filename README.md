@@ -32,8 +32,19 @@ for t in time_steps:
     u_next = full_step_solve(...)
 
 
-`full_step_solve` O(k) 
+`full_step_solve` `O(k)` where k is the size of the space discretization
 
+The full implementation is `O(n * k)` where n is the size of the time discretization
+
+Arithmetic Intensity is a measure of FLOPs/ MemoryMovement.
+
+The CPU implementation then yields an Arithmetic Intensity ~ ` O(n * k) / a`
+
+Where `a` is a function of the amount of data being moved out of and into the computing chip.
+
+For CPU implementation, this is ` size of L_1 cache / O(k)`
+
+On GPU this would be the `size of GPU buffer / O(k)`
 
 ```
 
