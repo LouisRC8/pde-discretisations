@@ -57,3 +57,6 @@ On GPU this would be the `size of GPU buffer / O(k)`
 
 
 ## Parallel in time
+![Sequential](sequential.png)
+![Preconditioner](alpha_circulant_preconditioner.png)
+![Parallelization](parallelization.png)
